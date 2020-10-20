@@ -1,0 +1,4 @@
+@media print  {
+    .newPage {page-break-after: always;}
+    .hidden {display: none;}
+}
