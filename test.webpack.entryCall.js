@@ -1,6 +1,7 @@
 console.warn('module loaded');
 
 var a = {a:1}, b=1;
+console.warn('in entrycall', process);
 
 module.exports = {
 	show: (url) => {
@@ -12,7 +13,8 @@ module.exports = {
 		console.warn('log called.')
 	},
 	a,
-	b
+	b,
+	env: process.NODE_ENV
 }
 
 setTimeout(()=>{a.a=2;b=2}, 1000)

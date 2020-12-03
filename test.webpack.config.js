@@ -2,7 +2,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const RemoveConsolePlugin = require('./removeConsolePlugin');
+const webpack = require('webpack');
 
 const outputDir = path.resolve(__dirname, 'dist');
 
@@ -26,6 +26,7 @@ module.exports = {
 		hot: true
 	},
 	optimization: {
+		usedExports: true,
 		moduleIds: 'hashed',
 		runtimeChunk: 'single',
 		splitChunks: {
@@ -71,12 +72,14 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: '[name].css'
 		}),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('test')
+		}),
 		new HtmlWebpackPlugin({
 			title: 'test',
 			favicon: './seals/tjcfp.png',
 			templateParameters: {key: 'value'},
 			template: './test.webpack.html'
 		}),
-		new RemoveConsolePlugin(['warn'])
 	]
 }

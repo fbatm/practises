@@ -4,6 +4,7 @@
   "description": "test",
   "private": true,
   "main": "application/index.jsx",
+  "sideEffects": false,
   "scripts": {
     "start": "webpack-dev-server --open",
     "dev": "webpack-dev-server --open --config test.webpack.config.js",
@@ -15,6 +16,7 @@
     "env": "env"
   },
   "dependencies": {
+    "@koa/router": "^9.4.0",
     "antd": "^4.5.4",
     "express": "^4.15.3",
     "koa": "^2.2.0",
