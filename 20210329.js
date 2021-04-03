@@ -70,6 +70,7 @@ function getTreeOnce(arr){
 }
 
 function genRandomNumeric(){
+  // Math.random() * 100 >> 0
   return parseInt(Math.random() * 100);
 }
 
