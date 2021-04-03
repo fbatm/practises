@@ -14,8 +14,10 @@ console.warn('requiredIndex,', requiredIndex.default, requiredIndex.test)
 
 // const entryCall = require('./test.webpack.entryCall.js');
 import entryCall from './test.webpack.entryCall.js';
-console.warn(entryCall.a, entryCall.b)
+console.warn(entryCall.a, entryCall.b, entryCall)
 import('./test.webpack.entryCall.js').then((res)=>(console.warn(res)))
+import {fun} from './test.webpack.entryCall2';
+fun();
 
 setTimeout(()=>console.warn(x, test, entryCall.a, entryCall.b, requiredIndex.default, requiredIndex.test), 1000)
 
