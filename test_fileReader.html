@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="file" onchange="onChangeFile(this.files)" />
+  </body>
+
+  <script src="./jszip.js"></script>
+  <script src="./xlsx.js"></script>
+  <script>
+    var globalFile = null;
+    const lastIndexOfSignature = function (data, sig) {
+      var sig0 = sig.charCodeAt(0),
+        sig1 = sig.charCodeAt(1),
+        sig2 = sig.charCodeAt(2),
+        sig3 = sig.charCodeAt(3);
+      for (var i = data.length - 4; i >= 0; --i) {
+        if (
+          data[i] === sig0 &&
+          data[i + 1] === sig1 &&
+          data[i + 2] === sig2 &&
+          data[i + 3] === sig3
+        ) {
+          return i;
+        }
+      }
+
+      return -1;
+    };
+    function onChangeFile(files) {
+      const file = files[0];
+      globalFile = file;
+      const reader = new FileReader();
+      const reader1 = new FileReader();
+      const reader2 = new FileReader();
+      reader2.onload = function () {
+        window.globalArrayBuffer = new Uint8Array(this.result);
+        console.dir(XLSX.read(globalArrayBuffer, { type: 'array' }));
+      };
+      // reader.readAsText(file);
+      // reader1.readAsBinaryString(file);
+      reader2.readAsArrayBuffer(file);
+    }
+  </script>
+</html>
