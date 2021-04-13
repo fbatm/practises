@@ -28,7 +28,7 @@ function getNextStr(str, pos) {
     if (str[pos] === '(' || str[pos] === ')') {
       return [str[pos], pos + 1];
     }
-    while (str[pos] !== ' ') {
+    while (str[pos] !== ' ' && str[pos] !== '(' && str[pos] !== ')' && pos < str.length) {
       s += str[pos++];
     }
 
@@ -43,7 +43,7 @@ function f(line) {
   stack.push(item)
   pos = newpos;
   let result;
-  while (stack.length && result !== 'error') {
+  while (stack.length) {
     const [nextOpStr, newpos] = getNextStr(line, pos++);
     pos = newpos;
     if (nextOpStr === ')') {
@@ -56,13 +56,15 @@ function f(line) {
       }
       if (stack[stack.length - 1] === '(') {
         stack.pop();
-      } else {
-        stack.push(result);
       }
+      if(!stack.length){
+        break;
+      }
+      stack.push(result);
     } else if (nextOpStr) {
       stack.push(nextOpStr)
     }
   }
   console.log(result);
 }
-f('(div 12 (sub 45 45))');
+f('(div 12 (div (sub 45 (add 1 4)) 10))');
