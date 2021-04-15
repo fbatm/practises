@@ -1,6 +1,9 @@
 function isPrim(number){
+  if(number != 2 && number % 2 === 0){
+    return false;
+  }
   const edge = Math.sqrt(number);
-  for(let i = 2;i < edge;i++){
+  for(let i = 3;i <= edge;i += 2){
     if(number % i === 0){
       return false;
     }
@@ -26,4 +29,5 @@ function getPrimNumbers(num){
   }
   return results.join(' ');
 }
-console.log(getPrimNumbers())
+console.log(getPrimNumbers(144))
+// console.log(isPrim(169))
